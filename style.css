@@ -1,0 +1,531 @@
+:root {
+    --bg-body: #f8fafc;
+    --primary: #16a34a; /* Green */
+    --primary-dark: #15803d;
+    --secondary: #1e293b; /* Dark Blue/Black */
+    --white: #ffffff;
+    --gray-soft: #e2e8f0;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    --radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+
+body {
+    background-color: var(--bg-body);
+    background-image: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
+    color: var(--secondary);
+    line-height: 1.6;
+    padding-bottom: 80px;
+}
+
+.page {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* HEADER */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 10px; z-index: 100;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border-radius: 99px;
+    box-shadow: var(--shadow-sm);
+    display: flex; justify-content: space-between; align-items: center;
+    border: 1px solid var(--gray-soft);
+}
+
+.brand-logo { font-size: 20px; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 5px; }
+.btn-outline {
+    background: transparent; border: 2px solid var(--primary); color: var(--primary);
+    padding: 6px 15px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.3s;
+}
+.btn-outline:hover { background: var(--primary); color: rgb(165, 53, 53); }
+
+/* --- HERO WRAPPER (LAYOUT) --- */
+/* এই অংশটি দুই সেকশনকে পাশাপাশি রাখবে */
+.hero-wrapper {
+    display: grid;
+    /* বাম পাশ ২.২ ভাগ (বড়), ডান পাশ ১ ভাগ (ছোট) */
+    grid-template-columns: 2.2fr 1fr; 
+    gap: 30px;
+    align-items: start;
+    margin-top: 20px;
+}
+  
+/* LEFT SIDE STYLE */
+.hero-left {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-soft);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    
+    /* এই লাইনটি যোগ করুন - এটাই মেইন সল্যুশন */
+    overflow: hidden; 
+    /* অথবা */
+    min-width: 0;
+    /* অথবা */
+    
+}
+
+.hero-badges {  gap: 10px; margin-bottom: 15px; text-align: center;}
+.badge {
+     background: #f2f2ea; color: var(--primary-dark); 
+     padding: 5px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+     }
+
+.hero-left h1 {
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.3;
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--secondary);
+}
+.hero-left h1 span { color: var(--primary); }
+.hero-left p { color: #456ea8; margin-bottom: 20px; font-size: 20px; }
+
+/* SWIPER SLIDER (মিসিং ছিল, যোগ করা হলো) */
+.hero-swiper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.hero-swiper .swiper-slide img {
+    width: 100%;
+    /* ফিক্সড হাইট বাদ দিয়ে auto অথবা aspect-ratio দিন */
+    height: auto; 
+    aspect-ratio: 16 / 9; /* এটা দিলে ছবি ল্যাপটপ স্ক্রিনের মতো ওয়াইড দেখাবে */
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+.swiper-pagination-bullet-active { background-color: var(--primary) !important; }
+  
+/* RIGHT SIDE STYLE (VIDEO) */
+ 
+.video-right {
+    background: #d8dbda;
+    color: rgb(141, 88, 88);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    height: 100%;
+}
+  
+.video-label { 
+    font-size: 10px; margin-bottom: 10px; color: #0d0e0f; display: flex; align-items: center; gap: 5px;
+}
+
+/* Video Frame Adjustments */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(167, 122, 122, 0.1);
+    margin-bottom: 20px;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;  /* আগে relative ছিল, এটা অবশ্যই absolute হতে হবে */
+    top: 0;              /* একদম উপর থেকে শুরু হবে */
+    left: 0;             /* বাম দিক থেকে শুরু হবে */
+    width: 100%;
+    height: 100%;        /* আগে 1% ছিল, এটা 100% না দিলে পুরোটা ভরবে না */
+    border: none;
+}
+  
+/* Points below video */
+.video-points h4 {
+    color: rgb(8, 8, 8);
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-bottom: 2px solid rgba(234, 10, 10, 0.2);
+    padding-bottom: 5px;
+}
+.video-points ul { padding: 0; }
+.video-points ul li {
+    list-style: none;
+    font-size: 13px;
+    color: #010101;
+    margin-bottom: 6px;
+}
+  
+/* BUTTON STYLE */
+.btn-primary-solid {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+    transition: 0.3s;
+}
+.btn-primary-solid:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+  
+/* --- RESPONSIVE (MOBILE VIEW) --- */
+@media (max-width: 900px) {
+    .hero-wrapper {
+        grid-template-columns: 1fr; /* মোবাইলে নিচে নিচে */
+        gap: 15px;
+    }
+    .hero-left, .video-right {
+        padding: 20px;
+    }
+}
+
+/* GUIDEBOOK */
+.guidebook-section { margin-top: 30px; }
+.section-title { font-size: 22px; font-weight: 700; margin-bottom: 15px; color: var(--secondary); text-align: center; }
+.scroll-box {
+    background: var(--white); height: 350px; overflow-y: auto; padding: 25px;
+    border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--gray-soft);
+}
+.guide-chapter { margin-bottom: 20px; border-bottom: 1px dashed var(--gray-soft); padding-bottom: 15px; }
+.guide-chapter h3 { color: var(--primary); font-size: 18px; margin-bottom: 10px; }
+.guide-list li { list-style: none; padding-left: 20px; position: relative; margin-bottom: 5px; font-size: 15px; }
+.guide-list li::before { content: '✔'; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
+.scroll-hint { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 5px; }
+
+/* PRODUCTS */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.product-card {
+    background: var(--white); border-radius: 16px; padding: 15px;
+    box-shadow: var(--shadow-sm); transition: 0.3s; border: 1px solid var(--gray-soft); text-align: center;
+}
+.product-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.prod-img { width: 100%; height: 150px; object-fit: cover; border-radius: 12px; margin-bottom: 10px; }
+.prod-title { font-weight: 700; color: var(--secondary); }
+.prod-desc { font-size: 13px; color: #010202; }
+
+
+/* -------------------From SEction ----------------------------------- */
+
+/* FORM */
+/* --- Google Font (সুন্দর ফন্টের জন্য) --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- কালার এবং ভেরিয়েবল সেটিংস --- */
+:root {
+  --primary-color: #24b659;       /* DXN গ্রিন কালার */
+  --primary-hover: #1b8e44;       /* মাউস নিলে যে কালার হবে */
+  --text-main: #1f2937;           /* গাঢ় কালো লেখা (স্পষ্ট দেখানোর জন্য) */
+  --text-label: #374151;          /* লেবেলের কালার */
+  --bg-input: #acaeb0;            /* ইনপুট বক্সের ব্যাকগ্রাউন্ড */
+  --border-color: #11448f;        /* বর্ডার কালার */
+  --shadow-card: 0 20px 40px -5px rgba(0, 0, 0, 0.1); /* কার্ডের শ্যাডো */
+  --shadow-focus: 0 0 0 4px rgba(36, 182, 89, 0.25);  /* ফোকাস গ্লো */
+}
+
+/* সবকিছুর ফন্ট ঠিক করা */
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* FORM */
+.form-card {
+    background: #e6c5c5;
+    width: 100%;
+    max-width: 900px; /* ফর্মটি চওড়া হবে */
+    margin: 30px auto;
+    padding: 40px;
+    border-radius: 20px;
+    border-top: 6px solid var(--primary-color); /* উপরে গ্রিন বর্ডার */
+    box-shadow: var(--shadow-card); /* ভেসে থাকা শ্যাডো */
+    position: relative;
+    text-align: center;
+  }
+
+  .form-headline {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .form-subtitle {
+    font-size: 15px;
+    color: #0b0d10;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px 14px;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .field-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .field-label span {
+    font-size: 12px;
+  }
+
+  .required {
+    font-size: 11px;
+    color: var(--accent);
+  }
+
+  input,
+  select,
+  textarea {
+    border-radius: 12px;
+    border: 1px solid rgba(15, 15, 15, 0.9);
+    background: rgba(240, 235, 228, 0.95);
+    color: var(--text-main);
+    padding: 9px 10px;
+    font-size: 13px;
+    outline: none;
+    transition: border var(--transition-fast), box-shadow var(--transition-fast),
+      background var(--transition-fast), transform var(--transition-fast);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #050404;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--accent-strong);
+    box-shadow: 0 0 0 1px rgba(174, 128, 88, 0.55);
+    transform: translateY(-1px);
+    background: rgba(165, 176, 203, 0.98);
+  }
+
+  textarea {
+    min-height: 74px;
+    resize: vertical;
+  }
+
+  input[type="file"] {
+    padding: 6px 10px;
+    font-size: 12px;
+    background: rgba(18, 18, 19, 0.98);
+  }
+
+  .form-footer {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .legal-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    max-width: 460px;
+    line-height: 1.45;
+  }
+
+  .status-message {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    margin-top: 4px;
+    padding: 8px 11px;
+    border-radius: 12px;
+    display: none;
+  }
+
+  .status-success {
+    background: rgba(231, 61, 4, 0.12);
+    color: #0a0a0a;
+    border: 1px solid rgba(39, 6, 224, 0.75);
+  }
+
+  .status-error {
+    background: rgba(199, 17, 17, 0.12);
+    color: #120303;
+    border: 1px solid rgba(239, 68, 68, 0.85);
+  }
+  .btn-primary{
+    padding: 12px;
+    background-color: #16a34a;
+    border-radius: 20px;
+     font-size: 20px; 
+     font-style: oblique;
+ }
+  
+
+
+/*---------------------------- From end ----------------------------------------------- */
+
+
+
+
+
+
+/* FOOTER & WHATSAPP */
+footer { text-align: center; color: #94a3b8; font-size: 12px; margin-top: 30px; }
+/* --- Footer Design Start --- */
+.modern-footer {
+    margin-top: 60px; /* ফর্ম থেকে দূরত্ব */
+    background: linear-gradient(135deg, #0f172a, #1e293b); /* ডার্ক প্রিমিয়াম ব্যাকগ্রাউন্ড */
+    color: #ffffff;
+    padding: 50px 20px 20px; /* উপরে বেশি জায়গা */
+    border-top: 5px solid #24b659; /* DXN গ্রিন বর্ডার */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* ব্যাকগ্রাউন্ডে হালকা গ্লো এফেক্ট */
+  .modern-footer::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 100px;
+    background: rgba(36, 182, 89, 0.15); /* সবুজ আভা */
+    filter: blur(60px);
+    border-radius: 50%;
+  }
+  
+  .footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* --- টাইটেল এবং টেক্সট --- */
+  .footer-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #ffffff, #a7f3d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* টেক্সটে গ্রাডিয়েন্ট */
+  }
+  
+  .footer-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #cbd5e1; /* হালকা ধূসর */
+    margin-bottom: 25px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .footer-text strong {
+    color: #24b659; /* টিমের নাম হাইলাইট */
+  }
+  
+  /* --- লিঙ্ক বা বাটন --- */
+  .join-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #24b659;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid #24b659;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+  
+  .join-link:hover {
+    background: #24b659;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(36, 182, 89, 0.3);
+  }
+  
+  /* --- ডিভাইডার লাইন --- */
+  .footer-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 30px 0;
+    width: 100%;
+  }
+  
+  /* --- নিচের কপিরাইট অংশ --- */
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #94a3b8;
+  }
+  
+  .footer-bottom strong {
+    color: #fff;
+  }
+  
+  .slogan {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #24b659;
+    font-weight: 600;
+  }
+  
+  /* মোবাইল রেস্পন্সিভ */
+  @media (max-width: 600px) {
+    .footer-title {
+      font-size: 22px;
+    }
+    .footer-text {
+      font-size: 14px;
+    }
+  }
+
+
+/* -------------------------- */
+.wa-float {
+    position: fixed; right: 20px; bottom: 20px; background: #25D366; color: white;
+    padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000;
+    display: flex; align-items: center; gap: 8px; transition: transform 0.3s;
+}
+.wa-float:hover { transform: translateY(-3px); }
+
+/* ANIMATIONS */
+[data-animate] { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
+.in-view { opacity: 1; transform: translateY(0); }
